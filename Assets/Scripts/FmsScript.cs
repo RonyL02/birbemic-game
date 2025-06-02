@@ -1,7 +1,8 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 public class FmsScript : MonoBehaviour
 {
+    public AudioSource collectSound;
+
     public AudioSource hitSound;
     CharacterController controller;
     public Transform cameraTransform; // 2 camera
@@ -62,6 +63,15 @@ public class FmsScript : MonoBehaviour
         var gravity = Physics.gravity * mass * Time.deltaTime;
         //Check CharacterController touching the ground during the last move?
         velocity.y = controller.isGrounded ? -1 : velocity.y + gravity.y;
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("coin"))
+        {
+            collectSound.Play();
+            Destroy(other.gameObject);
+        }
     }
 }
 

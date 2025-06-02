@@ -26,10 +26,10 @@ public class Present : MonoBehaviour
             rotationSpeed = Vector3.zero;
             gameObject.GetComponent<Collider>().enabled = false;
             Destroy(presentBox);
-            var value = Random.Range(1, 2);
+            var value = Random.Range(0, 2);
             if (value == 0)
             {
-                for (int i = 0; i < 5; i++)
+                for (int i = 0; i < Random.Range(7, 12); i++)
                 {
                     Instantiate(coin, transform);
                 }
