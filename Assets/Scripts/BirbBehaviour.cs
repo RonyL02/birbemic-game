@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class BirbBehaviour : MonoBehaviour
 {
+    public AudioSource crickSound;
     public float speed = 5f;
     public float sightRange = 15f;
     public float viewAngle = 90f; // field of view angle
@@ -43,7 +44,15 @@ public class BirbBehaviour : MonoBehaviour
                 // Check for tree or wall blocking line of sight
                 if (!Physics.Raycast(transform.position, directionToPlayer.normalized, distance, obstacleMask))
                 {
+                    if (!crickSound.isPlaying)
+                    {
+                        crickSound.Play();
+                    }
                     MoveToPlayer();
+                }
+                else
+                {
+                    crickSound.Stop();
                 }
             }
         }
