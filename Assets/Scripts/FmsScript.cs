@@ -2,7 +2,7 @@ using UnityEngine;
 public class FmsScript : MonoBehaviour
 {
     public AudioSource collectSound;
-
+    public GameObject spawn;
     public AudioSource hitSound;
     CharacterController controller;
     public Transform cameraTransform; // 2 camera
@@ -72,6 +72,22 @@ public class FmsScript : MonoBehaviour
             collectSound.Play();
             Destroy(other.gameObject);
         }
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "birb")
+        {
+            MoveToSpawn();
+        }
+    }
+
+    private void MoveToSpawn()
+    {
+        CharacterController controller = GetComponent<CharacterController>();
+        controller.enabled = false;
+        transform.position = spawn.transform.position;
+        controller.enabled = true;
     }
 }
 
