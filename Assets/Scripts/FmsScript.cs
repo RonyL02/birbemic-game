@@ -1,4 +1,7 @@
+using System.Collections;
 using UnityEngine;
+
+using UnityEngine.SceneManagement;
 public class FmsScript : MonoBehaviour
 {
     public AudioSource collectSound;
@@ -72,22 +75,35 @@ public class FmsScript : MonoBehaviour
             collectSound.Play();
             Destroy(other.gameObject);
         }
+
+        if (other.gameObject.CompareTag("birb"))
+        {
+            Die();
+        }
     }
 
     void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "birb")
         {
-            MoveToSpawn();
+            Die();
         }
     }
 
-    private void MoveToSpawn()
+    void Die()
     {
-        CharacterController controller = GetComponent<CharacterController>();
-        controller.enabled = false;
-        transform.position = spawn.transform.position;
-        controller.enabled = true;
+        cameraTransform.parent = null;
+        cameraTransform.gameObject.AddComponent<Rigidbody>();
+        cameraTransform.gameObject.GetComponent<Rigidbody>().AddForce(Vector3.down);
+
+        Debug.Log("Player Died!");
+        StartCoroutine(DestroySelf());
+    }
+
+    public IEnumerator DestroySelf()
+    {
+        yield return new WaitForSeconds(2);
+        SceneManager.LoadScene("GameOver");
     }
 }
 
