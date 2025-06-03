@@ -2,8 +2,12 @@ using System.Collections;
 using UnityEngine;
 
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 public class FmsScript : MonoBehaviour
 {
+    public Text scoreText;
+    public static int score = 0;
+    public static bool won = false; // 1
     public AudioSource collectSound;
     public GameObject spawn;
     public AudioSource hitSound;
@@ -18,7 +22,6 @@ public class FmsScript : MonoBehaviour
     public float mass = 1f;
     public float jumpSpeed = 5f;
     //character
-    private float lastHitTime = -1f;
 
     private void Awake()
     {
@@ -72,6 +75,9 @@ public class FmsScript : MonoBehaviour
     {
         if (other.gameObject.CompareTag("coin"))
         {
+
+            score++;
+            scoreText.text = "Coins: "+score.ToString();
             collectSound.Play();
             Destroy(other.gameObject);
         }
@@ -95,7 +101,7 @@ public class FmsScript : MonoBehaviour
         cameraTransform.parent = null;
         cameraTransform.gameObject.AddComponent<Rigidbody>();
         cameraTransform.gameObject.GetComponent<Rigidbody>().AddForce(Vector3.down);
-
+        won = false;
         Debug.Log("Player Died!");
         StartCoroutine(DestroySelf());
     }

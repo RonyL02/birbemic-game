@@ -1,11 +1,11 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class FinishGame : MonoBehaviour
 {
     public GameObject canvas;
     void Start()
     {
-        canvas.SetActive(false);
     }
 
     // Update is called once per frame
@@ -18,7 +18,12 @@ public class FinishGame : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            canvas.SetActive(true);
+            FmsScript.won = true;
+            if(FmsScript.score > PlayerPrefs.GetInt("score") && FmsScript.won)
+            {
+                PlayerPrefs.SetInt("score", FmsScript.score);
+            }
+            SceneManager.LoadScene("GameOver");
         }
     }
 }

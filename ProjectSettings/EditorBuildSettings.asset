@@ -6,9 +6,15 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/StartScene.unity
+    guid: 2f1bc9a84dbb6234c93161dcc413ffbb
+  - enabled: 1
     path: Assets/birbemic-game.unity
     guid: 75d55f1b68758b841b7acf6c14c02e9b
   - enabled: 1
     path: Assets/Scenes/GameOver.unity
-    guid: 90561aa2951dc404d960c5417593bab8
+    guid: 778cdead0e275dc4ba64d88a7d4abf78
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   m_configObjects: {}
